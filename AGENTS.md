@@ -232,7 +232,7 @@ docs: update README with architecture decisions
 - Test the comparison engine with parametrized tests covering: exact matches, near-misses, case differences, OCR artifacts, empty fields, special characters
 - Integration tests must check for API key env vars and `pytest.skip()` if missing
 - Keep AGENTS.md under 50 instructions — put details in supporting docs
-- Reference `.codex/rules/code-style.rules` for language-specific formatting rules
-- Reference `.codex/rules/testing.rules` for test case requirements and mocking strategy
-- Reference `.codex/rules/security.rules` for secrets management and input validation rules
-- Reference `.codex/rules/prompts.rules` for API contracts, Pydantic schemas, and LLM prompt templates
+- Reference `docs/rules/code-style.md` for language-specific formatting rules
+- Reference `docs/rules/testing.md` for test case requirements and mocking strategy
+- Reference `docs/rules/security.md` for secrets management and input validation rules
+- Reference `docs/rules/prompts.md` for API contracts, Pydantic schemas, and LLM prompt templates

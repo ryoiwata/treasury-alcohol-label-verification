@@ -10,7 +10,7 @@ after each phase**.
 - Each phase is a single, self-contained unit of work that ends in a **committable, non-broken state**.
 - **Tests are written in the same phase as the code they test.** Every phase that adds application code adds its tests, and the verification step requires `pytest` (for the relevant marker set) to pass.
 - After each phase: run `ruff check .` and `ruff format .`, run the phase's tests, then `git add` and `git commit` with a Conventional Commit message (see AGENTS.md → Git Workflow).
-- Authoritative references already in the repo: `AGENTS.md`, `README.md`, `docs/PRD.md`, `docs/SPEC.md`, and `.codex/rules/{code-style,prompts,security,testing}.rules`. This plan inlines the critical contracts so you do not have to cross-reference mid-implementation, but those files win if anything conflicts.
+- Authoritative references already in the repo: `AGENTS.md`, `README.md`, `docs/PRD.md`, `docs/SPEC.md`, and `docs/rules/{code-style,prompts,security,testing}.md`. This plan inlines the critical contracts so you do not have to cross-reference mid-implementation, but those files win if anything conflicts.
 
 ## Architecture recap (so each phase has context)
 
@@ -74,7 +74,7 @@ backend package imports cleanly.
 
 1. Create the directory structure exactly as in SPEC.md §2.1 and AGENTS.md → Project Structure. Add empty `__init__.py` files to every Python package directory (`app`, `app/routers`, `app/services`, `app/models`, `app/utils`, `tests`).
 
-2. Create `.gitignore` at the repo root with **exactly** the contents from `.codex/rules/security.rules` → .gitignore section:
+2. Create `.gitignore` at the repo root with **exactly** the contents from `docs/rules/security.md` → .gitignore section:
 
    ```gitignore
    # Secrets
