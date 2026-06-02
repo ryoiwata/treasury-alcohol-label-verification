@@ -104,7 +104,7 @@ class Comparator:
         Case must remain significant. Do not lowercase this field.
         """
         field = "warning_statement"
-        method = "exact_match"
+        method: Literal["exact_match"] = "exact_match"
 
         if _is_missing(extracted):
             return FieldComparison(
@@ -114,6 +114,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note="Warning statement not found on label",
+                confidence=None,
+                similarity=None,
             )
 
         assert extracted is not None
@@ -129,6 +131,7 @@ class Comparator:
                 method=method,
                 similarity=1.0,
                 note="Warning statement matches exactly",
+                confidence=None,
             )
 
         note = "Warning statement does not match required text"
@@ -146,6 +149,8 @@ class Comparator:
             expected=expected,
             method=method,
             note=note,
+            confidence=None,
+            similarity=None,
         )
 
     def compare_brand_name(
@@ -163,7 +168,7 @@ class Comparator:
     ) -> FieldComparison:
         """Compare ABV using numeric extraction and configured tolerance."""
         field = "abv"
-        method = "numeric_match"
+        method: Literal["numeric_match"] = "numeric_match"
 
         if _is_missing(extracted):
             return FieldComparison(
@@ -173,6 +178,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note="ABV not found on label",
+                confidence=None,
+                similarity=None,
             )
 
         assert extracted is not None
@@ -187,6 +194,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note="Could not extract a numeric ABV value",
+                confidence=None,
+                similarity=None,
             )
 
         diff = abs(extracted_num - expected_num)
@@ -215,6 +224,7 @@ class Comparator:
             method=method,
             similarity=None,
             note=note,
+            confidence=None,
         )
 
     def compare_net_contents(
@@ -224,7 +234,7 @@ class Comparator:
     ) -> FieldComparison:
         """Compare net contents by converting both values to milliliters."""
         field = "net_contents"
-        method = "numeric_match"
+        method: Literal["numeric_match"] = "numeric_match"
 
         if _is_missing(extracted):
             return FieldComparison(
@@ -234,6 +244,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note="Net contents not found on label",
+                confidence=None,
+                similarity=None,
             )
 
         assert extracted is not None
@@ -248,6 +260,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note="Could not extract a numeric volume value",
+                confidence=None,
+                similarity=None,
             )
 
         if math.isclose(extracted_ml, expected_ml, rel_tol=0.0, abs_tol=0.001):
@@ -264,6 +278,8 @@ class Comparator:
             expected=expected,
             method=method,
             note=note,
+            confidence=None,
+            similarity=None,
         )
 
     def compare_text_field(
@@ -273,7 +289,7 @@ class Comparator:
         field_name: str,
     ) -> FieldComparison:
         """Compare normalized text fields such as class/type and origin."""
-        method = "normalized_match"
+        method: Literal["normalized_match"] = "normalized_match"
 
         if _is_missing(extracted):
             return FieldComparison(
@@ -283,6 +299,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note=f"{field_name} not found on label",
+                confidence=None,
+                similarity=None,
             )
 
         assert extracted is not None
@@ -298,6 +316,7 @@ class Comparator:
                 method=method,
                 similarity=1.0,
                 note=f"{field_name} matches after normalization",
+                confidence=None,
             )
 
         ratio = _similarity_ratio(normalized_extracted, normalized_expected)
@@ -311,6 +330,7 @@ class Comparator:
             method=method,
             similarity=round(ratio, 2),
             note=_similarity_note(field_name, status, ratio),
+            confidence=None,
         )
 
     def _compare_fuzzy_field(
@@ -320,7 +340,7 @@ class Comparator:
         field_name: str,
     ) -> FieldComparison:
         """Compare a text field using fuzzy matching."""
-        method = "fuzzy_match"
+        method: Literal["fuzzy_match"] = "fuzzy_match"
 
         if _is_missing(extracted):
             return FieldComparison(
@@ -330,6 +350,8 @@ class Comparator:
                 expected=expected,
                 method=method,
                 note=f"{field_name} not found on label",
+                confidence=None,
+                similarity=None,
             )
 
         assert extracted is not None
@@ -351,6 +373,7 @@ class Comparator:
             method=method,
             similarity=round(ratio, 2),
             note=note,
+            confidence=None,
         )
 
     def _status_from_similarity(
