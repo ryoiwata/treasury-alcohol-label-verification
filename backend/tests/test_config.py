@@ -14,6 +14,7 @@ OPTIONAL_ENV_VARS = (
     "MAX_BATCH_SIZE",
     "MATCH_THRESHOLD",
     "WARNING_THRESHOLD",
+    "ABV_TOLERANCE",
 )
 
 
@@ -90,8 +91,10 @@ def test_load_config_custom_thresholds(monkeypatch: pytest.MonkeyPatch) -> None:
     set_required_config_env(monkeypatch)
     monkeypatch.setenv("MATCH_THRESHOLD", "0.90")
     monkeypatch.setenv("WARNING_THRESHOLD", "0.80")
+    monkeypatch.setenv("ABV_TOLERANCE", "0.25")
 
     config = load_and_validate_config()
 
     assert config.comparison_config.match_threshold == 0.90
     assert config.comparison_config.warning_threshold == 0.80
+    assert config.comparison_config.abv_tolerance == 0.25
