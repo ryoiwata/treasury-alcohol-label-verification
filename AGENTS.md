@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) and Codex when working with code in this repository.
+This file provides guidance to Codex when working with code in this repository.
 
 ## Project Overview
 
@@ -231,8 +231,8 @@ docs: update README with architecture decisions
 - Fail fast on startup if required environment variables are missing
 - Test the comparison engine with parametrized tests covering: exact matches, near-misses, case differences, OCR artifacts, empty fields, special characters
 - Integration tests must check for API key env vars and `pytest.skip()` if missing
-- Keep CLAUDE.md under 50 instructions — put details in supporting docs
-- Reference `docs/code-style.md` for language-specific formatting rules
-- Reference `docs/testing.md` for test case requirements and mocking strategy
-- Reference `docs/security.md` for secrets management and input validation rules
-- Reference `docs/prompts.md` for API contracts, Pydantic schemas, and LLM prompt templates
+- Keep AGENTS.md under 50 instructions — put details in supporting docs
+- Reference `.codex/rules/code-style.rules` for language-specific formatting rules
+- Reference `.codex/rules/testing.rules` for test case requirements and mocking strategy
+- Reference `.codex/rules/security.rules` for secrets management and input validation rules
+- Reference `.codex/rules/prompts.rules` for API contracts, Pydantic schemas, and LLM prompt templates

@@ -184,7 +184,7 @@ This was a deliberate architectural separation:
 - **Azure AI Vision** handles what it's best at: extracting raw text from images with high accuracy, including on imperfect photos (glare, angles, poor lighting). It returns text with spatial/bounding box data.
 - **GPT-4o** handles what it's best at: understanding context and structure. It takes the raw OCR dump and figures out which text is the brand name vs. the ABV vs. the warning statement, despite wildly varying label layouts.
 
-An alternative would be sending images directly to a multimodal LLM (GPT-4o Vision or Claude). This is faster to implement but loses the Azure-native OCR story and makes the entire pipeline dependent on a single external API. The two-service approach is more resilient and more aligned with production federal architecture.
+An alternative would be sending images directly to a multimodal LLM (GPT-4o Vision). This is faster to implement but loses the Azure-native OCR story and makes the entire pipeline dependent on a single external API. The two-service approach is more resilient and more aligned with production federal architecture.
 
 ---
 
